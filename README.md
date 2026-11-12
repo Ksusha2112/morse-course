@@ -22,15 +22,33 @@
 
 ## Запуск
 
+### Вариант 1 — всё сразу без Docker (одной командой)
+
+```bash
+python run_dev.py
+```
+
+Скрипт поднимает все три сервиса, дожидается готовности и открывает Swagger UI
+в браузере. Остановка — Ctrl+C. В PyCharm достаточно открыть `run_dev.py`
+и нажать ▶ (зелёный треугольник).
+
+Альтернативы: `run_all.bat` (Windows, сервисы в отдельных окнах) и
+`./run_all.sh` (Linux/macOS).
+
+### Вариант 2 — Docker
+
 ```bash
 docker compose up --build
 ```
 
-Приложение: http://localhost:8080
+Полный стек, включая фронтенд: http://localhost:8080
+
+### Адреса сервисов
 
 - Swagger UI бэкенда: http://localhost:8000/docs
 - Swagger UI статистики: http://localhost:8003/docs
 - Swagger UI экспорта: http://localhost:8004/docs
+- Веб-интерфейс (Docker): http://localhost:8080
 
 ## Тесты
 
