@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Азбука Морзе — конвертер</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <main class="card">
+    <div class="header-row">
+      <h1>Азбука Морзе</h1>
+      <button id="nav-btn" class="nav-btn">📊 Статистика</button>
+    </div>
+
+    <p class="subtitle" id="page-subtitle">Кодирование и декодирование текста</p>
+
+    <!-- СТРАНИЦА 1: КОНВЕРТЕР -->
+    <section id="converter-page">
+      <section class="tabs">
+        <button class="tab active" data-mode="encode">Текст → Морзе</button>
+        <button class="tab" data-mode="decode">Морзе → Текст</button>
+      </section>
+
+      <label for="input">Входные данные</label>
+      <textarea id="input" rows="4" placeholder="Введите текст..."></textarea>
+
+      <div class="row">
+        <button id="convert" class="primary">Преобразовать</button>
+        <label class="file-btn">
+          Загрузить файл
+          <input type="file" id="file" accept=".txt" hidden />
+        </label>
+      </div>
+
+      <label for="output">Результат</label>
+      <textarea id="output" rows="4" readonly></textarea>
+
+      <div class="row" style="margin-top: 10px;">
+        <button id="export-txt" class="primary" style="background:#94a3b8;">💾 Скачать TXT</button>
+        <button id="export-csv" class="primary" style="background:#4ade80;">📊 Скачать CSV</button>
+        <button id="export-pdf" class="primary" style="background:#f87171;">📄 Скачать PDF</button>
+      </div>
+    </section>
+
+    <!-- СТРАНИЦА 2: СТАТИСТИКА -->
+    <section id="stats-page" style="display: none;">
+      <div class="stats-box large">
+        <h3>📊 Общая статистика сервиса</h3>
+        <div class="stat-item">
+          <span class="stat-label">Всего переводов:</span>
+          <span class="stat-value" id="stat-total">0</span>
+        </div>
+        <div class="stat-item">
+          <span class="stat-label">Переводов в Морзе:</span>
+          <span class="stat-value" id="stat-enc">0</span>
+        </div>
+        <div class="stat-item">
+          <span class="stat-label">Переводов из Морзе:</span>
+          <span class="stat-value" id="stat-dec">0</span>
+        </div>
+      </div>
+    </section>
+
+    <div id="status" class="status"></div>
+  </main>
+  <script src="app.js"></script>
+</body>
+</html>

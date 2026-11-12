@@ -1,0 +1,53 @@
+services:
+  backend:
+    build: ./backend
+    container_name: morse-backend
+    ports:
+      - "8000:8000"
+    environment:
+      - STATS_SERVICE_URL=http://stats-service:8003
+    depends_on:
+      - stats-service
+    healthcheck:
+      test: ["CMD", "python", "-c", "import urllib.request; urllib.request.urlopen('http://localhost:8000/health')"]
+      interval: 10s
+      timeout: 3s
+      retries: 5
+
+  stats-service:
+    build: ./stats-service
+    container_name: morse-stats
+    ports:
+      - "8003:8003"
+    volumes:
+      - stats-data:/app/data
+    environment:
+      - STATS_DB_PATH=sqlite:////app/data/stats.db
+    healthcheck:
+      test: ["CMD", "python", "-c", "import urllib.request; urllib.request.urlopen('http://localhost:8003/health')"]
+      interval: 10s
+      timeout: 3s
+      retries: 5
+
+  export-service:
+    build: ./export-service
+    container_name: morse-export
+    ports:
+      - "8004:8004"
+    healthcheck:
+      test: ["CMD", "python", "-c", "import urllib.request; urllib.request.urlopen('http://localhost:8004/health')"]
+      interval: 10s
+      timeout: 3s
+      retries: 5
+
+  frontend:
+    build: ./frontend
+    container_name: morse-frontend
+    ports:
+      - "8080:80"
+    depends_on:
+      backend:
+        condition: service_healthy
+
+volumes:
+  stats-data:
