@@ -20,7 +20,9 @@ class ExportRequest(BaseModel):
 
 
 FONT_NAME = "DejaVu"
+BUNDLED_FONT = os.path.join(os.path.dirname(os.path.abspath(__file__)), "fonts", "DejaVuSans.ttf")
 FONT_CANDIDATES = [
+    BUNDLED_FONT,
     "/usr/share/fonts/truetype/dejavu/DejaVuSans.ttf",
     "/usr/share/fonts/dejavu/DejaVuSans.ttf",
     "/usr/share/fonts/TTF/DejaVuSans.ttf",
